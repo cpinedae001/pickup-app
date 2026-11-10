@@ -6,12 +6,25 @@ import {
   ZoomControl,
   useMap,
 } from "react-leaflet";
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 import { stores } from "../data/stores";
 import "leaflet/dist/leaflet.css";
 import type { Store } from "../models/Store";
 import { useEffect } from "react";
 
+const storeMarkerIcon = L.icon({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
 interface StoreMapProps {
   selectedStore?: Store;
   onSelectStore: (storeId: number) => void;
@@ -51,6 +64,7 @@ export default function StoreMap({
         <Marker
           key={store.id}
           position={[store.latitude, store.longitude]}
+          icon={storeMarkerIcon}
           eventHandlers={{ click: () => onSelectStore(store.id) }}
         >
           <Popup>
