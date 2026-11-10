@@ -21,23 +21,33 @@ export default function StorePage() {
   };
   const selectedStore = stores.find((store) => store.id === selectedStoreId);
   return (
-    <main className="p-6">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Bienvenido a nuestro pickup</h1>
-        <p className="mb-6 text-gray-600">Seleccione una tienda para iniciar</p>
+    <main className="flex h-dvh min-h-0 flex-col gap-4 overflow-hidden p-4 lg:gap-6 lg:p-6">
+      {/* Encabezado siempre visible */}
+      <header className="shrink-0">
+        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+          Bienvenido a nuestro pickup
+        </h1>
+        <p className="mt-2 text-sm text-gray-600">
+          Seleccione una tienda para iniciar
+        </p>
       </header>
-      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-        <section className="min-w-0">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">
+
+      {/* Contenido principal */}
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+        {/* Listado de tiendas */}
+        <section className="flex min-h-0 min-w-0 flex-col">
+          <h2 className="mb-3 shrink-0 text-lg font-semibold text-gray-900">
             Tiendas disponibles
           </h2>
-          <div className="mb-4">
+
+          <div className="mb-3 shrink-0">
             <label
               htmlFor="store-search"
               className="mb-2 block text-sm font-medium text-gray-700"
             >
               Buscar tienda
             </label>
+
             <input
               id="store-search"
               type="search"
@@ -48,7 +58,7 @@ export default function StorePage() {
             />
           </div>
 
-          <div className="flex max-h-96 flex-col gap-4 overflow-y-auto pr-2">
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto pr-2">
             {filteredStores.length > 0 ? (
               filteredStores.map((store) => (
                 <StoreCard
@@ -65,21 +75,28 @@ export default function StorePage() {
             )}
           </div>
         </section>
-        <section className="min-w-0 " aria-label="Mapa de tiendas disponibles">
+
+        {/* Mapa */}
+        <section
+          className="h-44 min-h-0 min-w-0 shrink-0 overflow-hidden rounded-lg sm:h-56 lg:h-auto lg:min-h-0 lg:shrink"
+          aria-label="Mapa de tiendas disponibles"
+        >
           <StoreMap
             selectedStore={selectedStore}
             onSelectStore={handleSelectStore}
           />
         </section>
       </div>
-      <div className="mt-6 flex justify-end">
+
+      {/* Acción inferior siempre visible */}
+      <div className="shrink-0 border-t border-gray-200 bg-white pt-3">
         <button
           type="button"
           onClick={handleContinue}
           disabled={selectedStoreId === null}
-          className="rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+          className="w-full rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-300 sm:ml-auto sm:block sm:w-auto"
         >
-          Continual al catálogo
+          Escoge tus productos
         </button>
       </div>
     </main>

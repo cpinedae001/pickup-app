@@ -39,7 +39,7 @@ export default function StoreMap({
       zoom={12}
       scrollWheelZoom={true}
       zoomControl={false}
-      className="h-96 w-full rounded-lg"
+      className="h-full w-full rounded-lg"
     >
       <MapUpdater selectedStore={selectedStore} />
       <TileLayer
