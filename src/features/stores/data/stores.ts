@@ -17,4 +17,12 @@ export const stores: Store[] = [
     latitude: 14.5815,
     longitude: -90.5125,
   },
+  {
+    id: 3,
+    name: "Pickup Zona Don Justo",
+    address: "Km 16 Centro comercial Punto 16, CES , Guatemala",
+    hours: "8:00 - 20:00",
+    latitude: 14.5483213,
+    longitude: -90.4554997,
+  },
 ];
