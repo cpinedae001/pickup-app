@@ -1,75 +1,95 @@
-# React + TypeScript + Vite
+# Pickup App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada con React para simular la compra de productos de supermercado bajo la modalidad **Pickup** (compra en línea y recogida en tienda).
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Selección de sucursal mediante un mapa interactivo.
+- Visualización de productos disponibles según la tienda seleccionada.
+- Carrito de compras con controles para agregar, incrementar, disminuir y eliminar productos.
+- Cálculo automático del subtotal y total del pedido.
+- Confirmación al cambiar de sucursal cuando existen productos en el carrito.
+- Formulario de checkout con validación de nombre, teléfono y correo electrónico opcional.
+- Generación de un número de pedido y tiempo estimado de preparación.
+- Persistencia del carrito mediante `localStorage`.
+- Interfaz adaptable a diferentes tamaños de pantalla.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React y TypeScript.
+- Vite.
+- Tailwind CSS.
+- React Router.
+- Leaflet y React Leaflet.
 
-## Expanding the ESLint configuration
+## Requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js compatible con las dependencias del proyecto.
+- npm.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Instalación
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Clonar el repositorio:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone https://github.com/cpinedae001/pickup-app.git
+cd pickup-app
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Instalar dependencias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
+
+Iniciar la aplicación:
+
+```bash
+npm run dev
+```
+
+## Validación técnica
+
+Ejecutar el análisis estático:
+
+```bash
+npm run lint
+```
+
+Verificar la compilación de producción:
+
+```bash
+npm run build
+```
+
+## Flujo de uso
+
+1. Seleccionar una sucursal en el mapa.
+2. Consultar el catálogo de productos disponibles.
+3. Agregar productos al carrito y ajustar las cantidades.
+4. Revisar el total y continuar al checkout.
+5. Completar los datos del cliente.
+6. Confirmar el pedido y consultar su número de referencia.
+
+## Reglas de negocio
+
+- Cada carrito pertenece a una única tienda.
+- Para comprar en otra sucursal con artículos existentes, el usuario debe confirmar que desea vaciar el carrito.
+- El pedido requiere al menos un producto.
+- El nombre y el teléfono son obligatorios; el correo electrónico es opcional.
+- Al confirmar el pedido, el carrito se vacía.
+
+## Alcance y limitaciones
+
+Esta versión es un MVP frontend con datos simulados.
+
+- No requiere autenticación ni procesamiento de pagos.
+- Los productos, las sucursales y la disponibilidad son datos locales.
+- Los pedidos se generan y mantienen en memoria durante la sesión actual de la aplicación.
+- Los artículos del carrito se conservan en `localStorage` del navegador.
+- Al actualizar la página, se pierde la confirmación almacenada únicamente en memoria.
+- El tiempo estimado de preparación es ilustrativo.
+
+## Autor
+
+Proyecto desarrollado como prueba técnica de React.
