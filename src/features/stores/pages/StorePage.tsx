@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import StoreMap from "../components/StoreMap";
 import { stores } from "../data/stores";
 import StoreCard from "./StoreCard";
 
 export default function StorePage() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStoreId, setSelectedStoreId] = useState<number | null>(null);
   const handleSelectStore = (storeId: number) => {
@@ -12,6 +14,12 @@ export default function StorePage() {
   const filteredStores = stores.filter((store) =>
     store.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+  const handleContinue = () => {
+    if (selectedStoreId === null) return;
+
+    navigate(`/catalog?storeId=${selectedStoreId}`);
+  };
+  const selectedStore = stores.find((store) => store.id === selectedStoreId);
   return (
     <main className="p-6">
       <header className="mb-8">
@@ -58,8 +66,21 @@ export default function StorePage() {
           </div>
         </section>
         <section className="min-w-0 " aria-label="Mapa de tiendas disponibles">
-          <StoreMap />
+          <StoreMap
+            selectedStore={selectedStore}
+            onSelectStore={handleSelectStore}
+          />
         </section>
+      </div>
+      <div className="mt-6 flex justify-end">
+        <button
+          type="button"
+          onClick={handleContinue}
+          disabled={selectedStoreId === null}
+          className="rounded-lg bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+        >
+          Continual al catálogo
+        </button>
       </div>
     </main>
   );
